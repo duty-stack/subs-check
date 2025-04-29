@@ -262,8 +262,8 @@ func (pc *ProxyChecker) updateProxyName(res *Result, httpClient *ProxyClient, sp
 
 	name := res.Proxy["name"].(string)
 
-	// 移除所有已有的标记（包括速度、IPRisk和平台标记）
-	name = regexp.MustCompile(`\s*\|(?:Netflix|Disney|Youtube|Openai|Gemini|\d+%|\s*⬇️\s*[\d.]+[KM]B/s)`).ReplaceAllString(name, "")
+	// 移除所有已有的标记（包括速度、IPRisk、UDP以及平台标记）
+	name = regexp.MustCompile(fmt.Sprintf(`\s*\|(?:Netflix|Disney|Youtube|Openai|Gemini|%s|\d+%%|\s*⬇️\s*[\d.]+[KM]B/s)`, regexp.QuoteMeta(config.GlobalConfig.UDPFlagText))).ReplaceAllString(name, "")
 	name = strings.TrimSpace(name)
 
 	var tags []string
@@ -277,6 +277,14 @@ func (pc *ProxyChecker) updateProxyName(res *Result, httpClient *ProxyClient, sp
 		}
 		tags = append(tags, speedStr)
 	}
+
+	// 添加 UDP 检查标志
+	if config.GlobalConfig.UDPCheck {
+		udpResult := platfrom.CheckUDP(res.Proxy)
+		if udpResult.UDP {
+			tags = append(tags, config.GlobalConfig.UDPFlagText)
+		}
+	}	
 
 	// 添加其他标记
 	if res.IPRisk != "" {

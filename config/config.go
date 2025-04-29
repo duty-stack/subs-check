@@ -43,6 +43,12 @@ type Config struct {
 	APIKey             string   `yaml:"api-key"`
 	GithubProxy        string   `yaml:"github-proxy"`
 	CallbackScript     string   `yaml:"callback-script"`
+	// 是否开启UDP检测，开启后通过STUN服务器检测UDP连通性
+	UDPCheck    bool     `yaml:"udp-check"`
+	// STUN 服务器列表，支持多个，任意一个检测通过即视为支持UDP
+	StunServer  []string `yaml:"stun-server"`
+	// UDP检查通过后附加的标志文本
+	UDPFlagText string   `yaml:"udp-flag-text"`
 }
 
 var GlobalConfig = &Config{
@@ -51,6 +57,10 @@ var GlobalConfig = &Config{
 	NotifyTitle:        "🔔 节点状态更新",
 	MihomoOverwriteUrl: "http://127.0.0.1:8199/sub/ACL4SSR_Online_Full.yaml",
 	Platforms:          []string{"openai", "youtube", "netflix", "disney", "gemini", "iprisk"},
+	// UDP检测默认配置
+	UDPCheck:    false,
+	StunServer:  []string{"stun.l.google.com:19302", "stun.cloudflare.com:3478"},
+	UDPFlagText: "UDP",
 }
 
 //go:embed config.example.yaml

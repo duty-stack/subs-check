@@ -6,6 +6,7 @@ require (
 	github.com/fsnotify/fsnotify v1.8.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/metacubex/mihomo v1.19.6-0.20250424115016-468cfc3cc47d
+	github.com/pion/stun/v3 v3.0.0
 	github.com/robfig/cron/v3 v3.0.1
 	gopkg.in/yaml.v3 v3.0.1
 )
@@ -13,6 +14,10 @@ require (
 require (
 	github.com/metacubex/bart v0.19.0 // indirect
 	github.com/metacubex/sing-shadowtls v0.0.0-20250412122235-0e9005731a63 // indirect
+	github.com/pion/dtls/v3 v3.0.1 // indirect
+	github.com/pion/logging v0.2.2 // indirect
+	github.com/pion/transport/v3 v3.0.7 // indirect
+	github.com/wlynxg/anet v0.0.3 // indirect
 	go4.org/netipx v0.0.0-20231129151722-fdeea329fbba // indirect
 )
 

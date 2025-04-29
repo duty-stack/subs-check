@@ -52,6 +52,17 @@ platforms:
   - gemini
   - iprisk
 
+# 是否开启UDP检测
+udp-check: false
+
+# STUN 服务器地址，用于UDP检测，支持填写多个服务器，任意一个检测通过即视为支持UDP
+stun-server:
+  - "stun.l.google.com:19302"
+  - "stun.cloudflare.com:3478"
+
+# UDP检查通过后附加的标志文本
+udp-flag-text: "UDP"
+
 # 保留之前测试成功的节点
 # 如果为true，则保留之前测试成功的节点，这样就不会因为上游链接更新，导致可用的节点被清除掉
 keep-success-proxies: false
