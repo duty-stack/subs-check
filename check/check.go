@@ -279,7 +279,7 @@ func (pc *ProxyChecker) updateProxyName(res *Result, httpClient *ProxyClient, sp
 	}
 
 	// 添加 UDP 检查标志
-	if config.GlobalConfig.UDPCheck {
+	if config.GlobalConfig.UDPCheck && speed >= config.GlobalConfig.MinSpeed {
 		udpResult := platfrom.CheckUDP(res.Proxy)
 		if udpResult.UDP {
 			tags = append(tags, config.GlobalConfig.UDPFlagText)

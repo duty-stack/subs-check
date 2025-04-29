@@ -161,7 +161,7 @@ func CheckUDP(proxyMap map[string]any) (result UDPCheckResult) {
 				result.ExternalIP = fmt.Sprintf("%s:%d", extIP, extPort)
 				break
 			}
-			time.Sleep(time.Duration(config.GlobalConfig.Timeout) * time.Millisecond)
+			time.Sleep(5 * time.Second)
 		}
 		if result.UDP {
 			break
@@ -172,11 +172,11 @@ func CheckUDP(proxyMap map[string]any) (result UDPCheckResult) {
 		"\n\n==================== UDP 检查开始 ====================\n"+
 			"代理: %s\n"+
 			"STUN 服务器: %s\n"+
-			"重试次数：%d\n"+
+			"重试次数：%d/%d\n"+
 			"ip地址: %s\n"+
 			"udp: %t\n"+
 			"==================== UDP 检查结束 ====================\n\n",
-		proxyName, serverUsed, attemptCount, result.ExternalIP, result.UDP,
+		proxyName, serverUsed, attemptCount, 5, result.ExternalIP, result.UDP,
 	)
 	fmt.Print(block)
 	return result
